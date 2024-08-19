@@ -49,13 +49,13 @@ All features are specific to What Sticks Platform Applicaitons and leverage the 
 ## Note on ws_utilities
 The subdirectories within ws_utilities will be labeled by the application within the platform that first required the process. It will start with a main.py. The intention is that these processes will be reused and to not duplicate difficult or complicated tasks. As we develop better ways or run into problems we want to fix them in one place.
 
-## Documentation (General)
+## :page_with_curl: Documentation (General) 
 
 ### Communicating with the What Sticks Database and using database sessions
 Most functions in WS11DataTools assume that if there is a connection with the database the database session should be passed in as an argument. The What Sticks convention is to have an object called `db_session` which will be created by the source application. The WS11DataTools function will then use the session but will not commit/rollback and close, that will be done by the source application that calls the function.
 
 
-## Documentation (ws_analysis)
+## :page_with_curl: Documentation (ws_analysis) 
 create_df_daily_<DATA_ELEMENT> the date column is expected to be of datetime.date()
 ### common
 #### create_user_df.py
@@ -80,31 +80,36 @@ extend_historically_user_location_date
   - if back_to_date is provided the function will extend historically back to the date. Otherwise it will extend back 14 days.
 
 
-## Documentation (ws_utilities)
+## :page_with_curl: Documentation (ws_utilities) 
+
+### /api/
+#### users.py > add_user_loc_day_process()
+- function screens for UserLocationDay within same day before adding. In other words, a user will not be allowed to have multiple rows within the same day.
+
 
 ### /dashboard_table_obj/
 These functions created the dictionaries that get converted to .json files that get sent to the WS11iOS app for the dashboard.
 This funcationality was formerly in WS11AppleService
 
-#### main.py > create_dashboard_table_object_json_file
+#### main.py > create_dashboard_table_object_json_file()
 - required parameter: user_id (string)
 - returns nothing but completes with the creation of .json file 
   - creates file in config.DASHBOARD_FILES_DIR folder
   - user_data_table_array_json_file_name = f"data_table_objects_array_{int(user_id):04}.json"
 
-#### main.py > create_data_source_object_json_file
+#### main.py > create_data_source_object_json_file()
 - required parameter: user_id (string)
 - returns nothing but completes with the creation of .json file 
   - creates file in config.DATA_SOURCE_FILES_DIR folder
 
 ### /visual_crossing_api/
-#### vc_api_requests.py > request_visual_crossing_for_one_day
+#### vc_api_requests.py > request_visual_crossing_for_one_day()
 - required paramters
   - location_db_obj: database object from Locations
   - date_1_start: date string in format `%Y-%m-%d`
 - returns dictionary of weather objects from Visual Crossing for date_1_start
 
-#### vc_api_requests.py > request_visual_crossing_for_last_30days
+#### vc_api_requests.py > request_visual_crossing_for_last_30days()
 - required paramters
   - location_db_obj: database object from Locations
 - returns list of dictionary of weather objects from Visual Crossing from current day going back 30 days.
