@@ -96,22 +96,22 @@ def find_user_location(db_session, user_latitude, user_longitude) -> str:
         # - 0.25 lon is approx 20km
         
         
-        if location.city == "San Francisco":
-            print("---------------------")
-            if min_lat <= user_latitude <= max_lat:
-                print("*** found latitude! *")
-            else:
-                print(f"min_lat: {min_lat}")
-                print(f"user_latitude: {user_latitude}")
-                print(f"max_lat: {max_lat}")
-            if min_lon <= user_longitude <= max_lon:
-                print("*** found user_longitude! *")
-            else:
-                print(f"min_lon: {min_lon}")
-                print(f"user_longitude: {user_longitude}")
-                print(f"max_lon: {max_lon}")
+        # if location.city == "San Francisco":
+        #     print("---------------------")
+        #     if min_lat <= user_latitude <= max_lat:
+        #         print("*** found latitude! *")
+        #     else:
+        #         print(f"min_lat: {min_lat}")
+        #         print(f"user_latitude: {user_latitude}")
+        #         print(f"max_lat: {max_lat}")
+        #     if min_lon <= user_longitude <= max_lon:
+        #         print("*** found user_longitude! *")
+        #     else:
+        #         print(f"min_lon: {min_lon}")
+        #         print(f"user_longitude: {user_longitude}")
+        #         print(f"max_lon: {max_lon}")
 
-            print("---------------------")
+        #     print("---------------------")
 
         # Check if user's coordinates are within the bounding box
         if min_lat <= user_latitude <= max_lat and min_lon <= user_longitude <= max_lon:
