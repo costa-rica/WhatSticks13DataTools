@@ -147,7 +147,7 @@ def create_dashboard_table_object_json_file(user_id):
         logger_ws_utilities.info(f"- WSAS COMPLETED - NOT enough - dashboard data to produce a file for this user -")
 
 
-def create_data_source_object_json_file(user_id, time_stamp_str=datetime.now().strftime('%Y%m%d-%H%M%S')):
+def create_data_source_object_json_file(user_id, time_stamp_str=datetime.now().strftime('%Y%m%d-%H%M')):
     logger_ws_utilities.info(f"- WSAS creating data source object file for user: {user_id} -")
     list_data_source_objects = []
 
@@ -164,7 +164,14 @@ def create_data_source_object_json_file(user_id, time_stamp_str=datetime.now().s
     apple_health_record_count, earliest_date_str = get_apple_health_count_date(user_id)
     data_source_object_apple_health['recordCount'] = apple_health_record_count
     data_source_object_apple_health['earliestRecordDate'] = earliest_date_str
-    data_source_object_apple_health['lastUpdate'] = time_stamp_str
+
+    # Convert the string to a datetime object
+    time_stamp_str_converted_to_date_obj = datetime.strptime(time_stamp_str, '%Y%m%d-%H%M')
+    # Format the datetime object to the desired string format
+    formatted_last_update_date_str = time_stamp_str_converted_to_date_obj.strftime('%b %d, %Y %H:%M')
+
+
+    data_source_object_apple_health['lastUpdate'] = formatted_last_update_date_str
     # data_source_object_apple_health['earliestRecordDate']="{:,}".format(len(df_apple_health))
     list_data_source_objects.append(data_source_object_apple_health)
 
