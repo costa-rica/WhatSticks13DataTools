@@ -10,6 +10,7 @@ from ws_models import DatabaseSession, Users
 import pandas as pd
 import json
 from ws_analysis import create_df_daily_user_location_consecutive
+from datetime import datetime
 
 
 def create_dashboard_table_object_json_file(user_id):
@@ -146,7 +147,7 @@ def create_dashboard_table_object_json_file(user_id):
         logger_ws_utilities.info(f"- WSAS COMPLETED - NOT enough - dashboard data to produce a file for this user -")
 
 
-def create_data_source_object_json_file(user_id):
+def create_data_source_object_json_file(user_id, time_stamp_str=datetime.now().strftime('%Y%m%d-%H%M%S')):
     logger_ws_utilities.info(f"- WSAS creating data source object file for user: {user_id} -")
     list_data_source_objects = []
 
@@ -163,6 +164,7 @@ def create_data_source_object_json_file(user_id):
     apple_health_record_count, earliest_date_str = get_apple_health_count_date(user_id)
     data_source_object_apple_health['recordCount'] = apple_health_record_count
     data_source_object_apple_health['earliestRecordDate'] = earliest_date_str
+    data_source_object_apple_health['lastUpdate'] = time_stamp_str
     # data_source_object_apple_health['earliestRecordDate']="{:,}".format(len(df_apple_health))
     list_data_source_objects.append(data_source_object_apple_health)
 
