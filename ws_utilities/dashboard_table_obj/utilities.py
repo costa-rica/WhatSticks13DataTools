@@ -20,7 +20,7 @@ def get_apple_health_count_date(user_id):
 
     # Make dataframe from AppleHealthQuantityCategory data
     if os.path.exists(pickle_data_path_and_name_qty_cat):
-        logger_ws_utilities.info(f"- reading pickle file for workouts: {pickle_data_path_and_name_qty_cat} -")
+        logger_ws_utilities.info(f"- reading pickle file for qty_cat: {pickle_data_path_and_name_qty_cat} -")
         # df_existing_user_workouts_data=pd.read_pickle(pickle_apple_qty_cat_path_and_name)
         # df=pd.read_pickle(pickle_data_path_and_name_qty_cat)
         df_apple_qty_cat = pd.read_pickle(pickle_data_path_and_name_qty_cat)
@@ -30,6 +30,9 @@ def get_apple_health_count_date(user_id):
         # df = pd.read_sql_query(db_query.statement, engine)
         # wrap_up_session(db_session)
         df_apple_qty_cat = create_df_from_db_table_name("apple_health_quantity_category")
+    
+    logger_ws_utilities.info(f"** seemed to stop here: ")
+    logger_ws_utilities.info(f"df_apple_qty_cat length:{len(df_apple_qty_cat)} ")
     
     if os.path.exists(pickle_data_path_and_name_workouts):
         df_apple_workouts = pd.read_pickle(pickle_data_path_and_name_workouts)
