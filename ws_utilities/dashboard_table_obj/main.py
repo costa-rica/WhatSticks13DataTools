@@ -165,8 +165,11 @@ def create_data_source_object_json_file(user_id, time_stamp_str=datetime.now().s
     data_source_object_apple_health['recordCount'] = apple_health_record_count
     data_source_object_apple_health['earliestRecordDate'] = earliest_date_str
 
-    # Convert the string to a datetime object
-    time_stamp_str_converted_to_date_obj = datetime.strptime(time_stamp_str, '%Y%m%d-%H%M')
+    if time_stamp_str == "just_recalculate":
+        time_stamp_str_converted_to_date_obj = datetime.now()
+    else:
+        # Convert the string to a datetime object
+        time_stamp_str_converted_to_date_obj = datetime.strptime(time_stamp_str, '%Y%m%d-%H%M')
     # Format the datetime object to the desired string format
     formatted_last_update_date_str = time_stamp_str_converted_to_date_obj.strftime('%b %d, %Y %H:%M')
 
